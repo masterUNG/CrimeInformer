@@ -3,10 +3,20 @@ package appewtc.masterung.crimeinformer;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
+
+import java.util.ArrayList;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -86,7 +96,34 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void updateValueToServer() {
 
-    }
+        //Change Policy
+        StrictMode.ThreadPolicy myPolicy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+        StrictMode.setThreadPolicy(myPolicy);
+
+        //UpLoad Value
+        try {
+
+            ArrayList<NameValuePair> objNameValuePairs = new ArrayList<NameValuePair>();
+            objNameValuePairs.add(new BasicNameValuePair("isAdd", "true"));
+            objNameValuePairs.add(new BasicNameValuePair("Name", nameString));
+            objNameValuePairs.add(new BasicNameValuePair("Surname", surnameString));
+            objNameValuePairs.add(new BasicNameValuePair("ID_card", idCardString));
+            objNameValuePairs.add(new BasicNameValuePair("PhoneNumber", phoneString));
+            objNameValuePairs.add(new BasicNameValuePair("Email", eMailString));
+
+            HttpClient objHttpClient = new DefaultHttpClient();
+            HttpPost objHttpPost = new HttpPost("http://swiftcodingthai.com/jar/php_add_data_jar.php");
+            objHttpPost.setEntity(new UrlEncodedFormEntity(objNameValuePairs, "UTF-8"));
+            objHttpClient.execute(objHttpPost);
+
+
+        } catch (Exception e) {
+            MyAlertDialog objMyAlertDialog = new MyAlertDialog();
+            objMyAlertDialog.nagativeDialog(RegisterActivity.this, "เกิดความผิดพลาด", "ไม่สามารถเชื่อมต่อ Server ได้");
+        }
+
+
+    }   // updateValueToServer
 
     public void clickCancel(View view) {
         finish();
