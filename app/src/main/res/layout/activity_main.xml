@@ -27,6 +27,7 @@
         <Button
             android:layout_width="@dimen/logo"
             android:layout_height="@dimen/logo"
+            android:onClick="clickLogin"
             android:text="@string/login"
             android:id="@+id/button"
             android:layout_gravity="center_horizontal"
@@ -36,6 +37,7 @@
         <Button
             android:layout_width="@dimen/logo"
             android:layout_height="@dimen/logo"
+            android:onClick="clickRegister"
             android:text="@string/register"
             android:id="@+id/button2"
             android:layout_gravity="center_horizontal"
