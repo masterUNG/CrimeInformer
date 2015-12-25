@@ -2,9 +2,23 @@ package appewtc.masterung.crimeinformer;
 
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -62,6 +76,66 @@ public class LoginActivity extends AppCompatActivity {
 
     private void synChronizeJSON() {
 
+        //Setup New Policy
+        StrictMode.ThreadPolicy myPolicy = new StrictMode.ThreadPolicy
+                .Builder().permitAll().build();
+        StrictMode.setThreadPolicy(myPolicy);
+
+        //1. Create InputStream
+        InputStream objInputStream = null;
+        String TAG = "Jar";
+        String strURL = "http://swiftcodingthai.com/jar/php_get_data.php";
+
+        try {
+
+            HttpClient objHttpClient = new DefaultHttpClient();
+            HttpPost objHttpPost = new HttpPost(strURL);
+            HttpResponse objHttpResponse = objHttpClient.execute(objHttpPost);
+            HttpEntity objHttpEntity = objHttpResponse.getEntity();
+            objInputStream = objHttpEntity.getContent();
+
+        } catch (Exception e) {
+            Log.d(TAG, "InputStream ==> " + e.toString());
+        }
+
+        //2. Create JSON String
+        String strJSON = null;
+        try {
+
+            BufferedReader objBufferedReader = new BufferedReader(new InputStreamReader(objInputStream, "UTF-8"));
+            StringBuilder objStringBuilder = new StringBuilder();
+            String strLine = null;
+
+            while ((strLine = objBufferedReader.readLine()) != null) {
+                objStringBuilder.append(strLine);
+            }   // while
+            objInputStream.close();
+            strJSON = objStringBuilder.toString();
+
+        } catch (Exception e) {
+            Log.d(TAG, "strJSON ==> " + e.toString());
+        }
+
+        //3. Update JSON to SQLite
+        try {
+
+            JSONArray objJsonArray = new JSONArray(strJSON);
+            for (int i = 0; i < objJsonArray.length(); i++) {
+                JSONObject object = objJsonArray.getJSONObject(i);
+                String strUser = object.getString(ManageTABLE.COLUMN_USER);
+                String strPassword = object.getString(ManageTABLE.COLUMN_PASSWORD);
+                String strName = object.getString(ManageTABLE.COLUMN_NAME);
+                String strSurname = object.getString(ManageTABLE.COLUMN_SURNAME);
+                String strIDcard = object.getString(ManageTABLE.COLUMN_ID_CARD);
+                String strPhoneNumber = object.getString(ManageTABLE.COLUMN_PHONENUMBER);
+                String strEmail = object.getString(ManageTABLE.COMUMN_EMAIL);
+                objManageTABLE.addNewValue(strUser, strPassword, strName,
+                        strSurname, strIDcard, strPhoneNumber, strEmail);
+            }
+
+        } catch (Exception e) {
+            Log.d(TAG, "Update ==> " + e.toString());
+        }
 
 
     }   // synChronzeJSON
