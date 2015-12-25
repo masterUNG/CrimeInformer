@@ -11,7 +11,15 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        //Create Or Open SQLite
+        createOrOpen();
+
     }   // onCreate
+
+    private void createOrOpen() {
+        ManageTABLE objManageTABLE = new ManageTABLE(this);
+    }
 
     public void clickLogin(View view) {
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
