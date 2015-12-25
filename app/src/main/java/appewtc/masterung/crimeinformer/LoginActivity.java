@@ -63,10 +63,43 @@ public class LoginActivity extends AppCompatActivity {
 
             synChronizeJSON();
 
+            checkUser();
+
 
         }
 
     }   // clickLogin
+
+    private void checkUser() {
+
+        try {
+
+            String[] strMyResult = objManageTABLE.searchUser(userString);
+
+            if (passwordString.equals(strMyResult[2])) {
+
+                welcomeDialog();
+
+            } else {
+
+                MyAlertDialog objMyAlertDialog = new MyAlertDialog();
+                objMyAlertDialog.nagativeDialog(LoginActivity.this,
+                        "Password False", "Please Try Again Password False");
+
+            }
+
+
+        } catch (Exception e) {
+            MyAlertDialog objMyAlertDialog = new MyAlertDialog();
+            objMyAlertDialog.nagativeDialog(LoginActivity.this,
+                    "User False", "No " + userString + " in my Database");
+        }
+
+    }   // checkUser
+
+    private void welcomeDialog() {
+
+    }
 
     private void deleteAllSQLite() {
         SQLiteDatabase objSqLiteDatabase = openOrCreateDatabase(MyOpenHelper.DATABASE_NAME,
