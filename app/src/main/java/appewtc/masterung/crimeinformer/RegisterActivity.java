@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import org.apache.http.NameValuePair;
 import org.apache.http.client.HttpClient;
@@ -115,6 +116,8 @@ public class RegisterActivity extends AppCompatActivity {
             HttpPost objHttpPost = new HttpPost("http://swiftcodingthai.com/jar/php_add_data_jar.php");
             objHttpPost.setEntity(new UrlEncodedFormEntity(objNameValuePairs, "UTF-8"));
             objHttpClient.execute(objHttpPost);
+
+            Toast.makeText(RegisterActivity.this, "Update Register Finish", Toast.LENGTH_SHORT).show();
 
 
         } catch (Exception e) {
