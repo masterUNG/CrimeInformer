@@ -5,5 +5,11 @@
     <string name="login">Login</string>
     <string name="register">Register</string>
 
+    <string name="well1">ผู้แจ้ง :</string>
+    <string name="lat">ละติจูด :</string>
+    <string name="lng">ลองติจูด :</string>
+    <string name="crime">กลุ่มอาชญากรรม</string>
+    <string name="detail">รายละเอียด</string>
+
 
 </resources>
