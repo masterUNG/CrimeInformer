@@ -9,7 +9,7 @@ import android.widget.TextView;
 public class ServiceActivity extends AppCompatActivity {
 
     //Explicit
-    private TextView showNameTextView;
+    private TextView showNameTextView, showLatTextView, showLngTextView;
     private String nameString, surnameString, idString;
     private int idAnInt;
 

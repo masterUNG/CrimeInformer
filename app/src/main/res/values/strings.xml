@@ -10,6 +10,7 @@
     <string name="lng">ลองติจูด :</string>
     <string name="crime">กลุ่มอาชญากรรม</string>
     <string name="detail">รายละเอียด</string>
+    <string name="location">คุณอยู่ที่ :</string>
 
 
 </resources>
