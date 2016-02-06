@@ -6,10 +6,10 @@ package appewtc.masterung.crimeinformer;
 public class MyData {
 
     //Explicit
-    public String[] mainHeadStrings = {"MainHead1", "MainHead2", "MainHead3"};
-    public String[][] subHeadStrings = {{"subHead11", "subHead12", "subHead13", "subHead14"},
-            {"subHead21", "subHead22", "subHead23"},
-            {"subHead31", "subHead32", }};
+    public String[] mainHeadStrings = {"ความผิดเกี่ยวกับทรัพย์", "ความผิดเกี่ยวกับชีวิต ร่างกาย และเพศ", "ความผิดพิเศษ"};
+    public String[][] subHeadStrings = {{"ลักทรัพย์","วิ่งราวทรัพย์","ชิงทรัพย์","ปล้นทรัพย์","กรรโชกทรัพย์","ยักยอกทรัพย์","ฉ้อโกง","วางเพลิง"},
+            {"ทะเลาวิวาท","กระทำอนาจาร","ข่มขืนกระทำชำเรา","เสียชีวิต"},
+            {"แข่งรถในทางสาธารณะ","อุบัติเหตุจราจร","ยาเสพติด","ลักลอบเล่นการพนัน","แรงงานต่างด้าว"}};
 
 
 }   // Main Class
