@@ -1,7 +1,9 @@
 package appewtc.masterung.crimeinformer;
 
 import android.Manifest;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,6 +14,7 @@ import android.location.LocationManager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
 
@@ -19,7 +22,7 @@ public class ServiceActivity extends AppCompatActivity {
 
     //Explicit
     private TextView showNameTextView, showLatTextView, showLngTextView;
-    private String nameString, surnameString, idString;
+    private String nameString, surnameString, idString, groupCrimeString;
     private int idAnInt;
     private LocationManager objLocationManager;
     private Criteria objCriteria;
@@ -50,12 +53,49 @@ public class ServiceActivity extends AppCompatActivity {
 
     private void createExpanListView() {
 
+        MyData objMyData = new MyData();
+        String[] parentStrings = objMyData.mainHeadStrings;
+        final String[][] childStrings = objMyData.subHeadStrings;
+
         MyExpanableListView adapterListView = new MyExpanableListView(ServiceActivity.this);
         objExpandableListView.setAdapter(adapterListView);
 
+        objExpandableListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
+            @Override
+            public boolean onChildClick(ExpandableListView expandableListView, View view, int i, int i1, long l) {
+
+                confirmGroupCrime(childStrings[i][i1]);
+
+                return false;
+            }
+        });
 
 
     }   // createExpanListView
+
+    private void confirmGroupCrime(final String strGroupCrime) {
+
+        AlertDialog.Builder objBuilder = new AlertDialog.Builder(this);
+        objBuilder.setIcon(R.drawable.icon_question);
+        objBuilder.setTitle(getResources().getString(R.string.crime));
+        objBuilder.setMessage("คุณเลือก ==> " + strGroupCrime);
+        objBuilder.setCancelable(false);
+        objBuilder.setPositiveButton("ใช่", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                groupCrimeString = strGroupCrime;
+                dialogInterface.dismiss();
+            }
+        });
+        objBuilder.setNegativeButton("ไม่ใช่", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        objBuilder.show();
+
+    }   // confirmGroupCrime
 
     @Override
     protected void onResume() {
