@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseExpandableListAdapter;
+import android.widget.CheckedTextView;
 
 /**
  * Created by masterUNG on 1/29/16 AD.
@@ -17,6 +18,7 @@ public class MyExpanableListView extends BaseExpandableListAdapter{
     private String[][] childStrings = objMyData.subHeadStrings;
 
     public MyExpanableListView(Context context) {
+        objContext = context;
     }   // Constructor
 
     @Override
@@ -56,16 +58,24 @@ public class MyExpanableListView extends BaseExpandableListAdapter{
 
     @Override
     public View getGroupView(int i, boolean b, View view, ViewGroup viewGroup) {
-        return null;
+
+        CheckedTextView objCheckedTextView = new CheckedTextView(objContext);
+        objCheckedTextView.setText(parentStrings[i]);
+
+        return objCheckedTextView;
     }
 
     @Override
     public View getChildView(int i, int i1, boolean b, View view, ViewGroup viewGroup) {
-        return null;
+
+        CheckedTextView objCheckedTextView = new CheckedTextView(objContext);
+        objCheckedTextView.setText("     ==> " + childStrings[i][i1]);
+
+        return objCheckedTextView;
     }
 
     @Override
     public boolean isChildSelectable(int i, int i1) {
-        return false;
+        return true;
     }
 }   // Main Class
