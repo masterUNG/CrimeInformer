@@ -143,5 +143,6 @@
         android:layout_height="wrap_content"
         android:text="Sent Data"
         android:id="@+id/button6"
-        android:layout_alignParentBottom="true" />
+        android:layout_alignParentBottom="true"
+        android:onClick="clickSentData" />
 </RelativeLayout>

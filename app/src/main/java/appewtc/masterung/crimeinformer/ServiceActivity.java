@@ -15,19 +15,26 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
+
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class ServiceActivity extends AppCompatActivity {
 
     //Explicit
     private TextView showNameTextView, showLatTextView, showLngTextView;
-    private String nameString, surnameString, idString, groupCrimeString;
+    private String nameString, surnameString, idString,
+            groupCrimeString, categoryString, crimeString, detailString, dateString;
     private int idAnInt;
     private LocationManager objLocationManager;
     private Criteria objCriteria;
     private boolean GPSABoolean, networkABoolean;
     private ExpandableListView objExpandableListView;
+    private EditText detailEditText;
 
 
     @Override
@@ -50,6 +57,52 @@ public class ServiceActivity extends AppCompatActivity {
 
 
     }   // Main Method
+
+    public void clickSentData(View view) {
+
+        detailString = detailEditText.getText().toString().trim();
+        if (detailString.equals("")) {
+            detailString = "n/a";
+        }   // if
+
+        //Get Time
+        DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss" );
+        Date date = new Date();
+        dateString = dateFormat.format(date);
+
+        //Dialog Confirm
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setIcon(R.drawable.icon_question);
+        builder.setTitle("โปรดตรวจสอบข้อมูล");
+        builder.setMessage("เวลา = " + dateString + "\n" +
+        "ผู้แจ้ง = " + nameString + "\n" +
+        "ละติจูต = " + showLatTextView.getText().toString() + "\n" +
+        "ลองติจูด = " + showLngTextView.getText().toString() + "\n" +
+        "กลุ่มอาชณากรรม = " + categoryString + "\n" +
+        "ความผิด = " + crimeString + "\n" +
+        "รายละเอียด = " + detailString);
+        builder.setCancelable(false);
+        builder.setPositiveButton("แจ้งเหตุ", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                updateValueToServer();
+                dialogInterface.dismiss();
+            }
+        });
+        builder.setNegativeButton("แก้ไข", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                dialogInterface.dismiss();
+            }
+        });
+        builder.show();
+
+
+    }   // clickSentData
+
+    private void updateValueToServer() {
+
+    }
 
     private void createExpanListView() {
 
@@ -74,6 +127,9 @@ public class ServiceActivity extends AppCompatActivity {
     }   // createExpanListView
 
     private void confirmGroupCrime(String parentString, final String strGroupCrime) {
+
+        categoryString = parentString;
+        crimeString = strGroupCrime;
 
         AlertDialog.Builder objBuilder = new AlertDialog.Builder(this);
         objBuilder.setIcon(R.drawable.icon_question);
@@ -243,6 +299,7 @@ public class ServiceActivity extends AppCompatActivity {
         showLatTextView = (TextView) findViewById(R.id.textView10);
         showLngTextView = (TextView) findViewById(R.id.textView12);
         objExpandableListView = (ExpandableListView) findViewById(R.id.expandableListView);
+        detailEditText = (EditText) findViewById(R.id.editText8);
 
     }   // bindWidget
 
