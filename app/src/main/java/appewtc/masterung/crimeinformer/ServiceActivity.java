@@ -11,6 +11,7 @@ import android.location.Criteria;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.StrictMode;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,9 +19,18 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import org.apache.http.NameValuePair;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.entity.UrlEncodedFormEntity;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.message.BasicNameValuePair;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 public class ServiceActivity extends AppCompatActivity {
@@ -102,7 +112,32 @@ public class ServiceActivity extends AppCompatActivity {
 
     private void updateValueToServer() {
 
-    }
+        StrictMode.ThreadPolicy threadPolicy = new StrictMode.ThreadPolicy
+                .Builder().permitAll().build();
+
+        try {
+
+            ArrayList<NameValuePair> nameValuePairs = new ArrayList<NameValuePair>();
+            nameValuePairs.add(new BasicNameValuePair("isAdd", "true"));
+            nameValuePairs.add(new BasicNameValuePair("Informer", nameString));
+            nameValuePairs.add(new BasicNameValuePair("Date", dateString));
+            nameValuePairs.add(new BasicNameValuePair("Lat", showLatTextView.getText().toString()));
+            nameValuePairs.add(new BasicNameValuePair("Lng", showLngTextView.getText().toString()));
+            nameValuePairs.add(new BasicNameValuePair("Category", categoryString));
+            nameValuePairs.add(new BasicNameValuePair("Crime", crimeString));
+            nameValuePairs.add(new BasicNameValuePair("Detail", detailString));
+
+            HttpClient httpClient = new DefaultHttpClient();
+            HttpPost httpPost = new HttpPost("http://swiftcodingthai.com/jar/php_add_crime.php");
+            httpPost.setEntity(new UrlEncodedFormEntity(nameValuePairs, "UTF-8"));
+            httpClient.execute(httpPost);
+
+            Toast.makeText(ServiceActivity.this, "แจ้งเหตุไปที่ Server เรียบร้อยแล้ว ขอบคุณครับ", Toast.LENGTH_SHORT).show();
+        } catch (Exception e) {
+            Toast.makeText(ServiceActivity.this, "ไม่สามารถแจ้งเหตุได้", Toast.LENGTH_SHORT).show();
+        }
+
+    }   // updateValueToServer
 
     private void createExpanListView() {
 
