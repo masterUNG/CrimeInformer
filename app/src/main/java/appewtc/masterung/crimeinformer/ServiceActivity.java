@@ -70,6 +70,7 @@ public class ServiceActivity extends AppCompatActivity {
     public void clickHistory(View view) {
         Intent intent = new Intent(ServiceActivity.this, UserHistoryListView.class);
         intent.putExtra("id", idString);
+        intent.putExtra("Name", nameString);
         startActivity(intent);
     }
 
