@@ -4,6 +4,7 @@ import android.Manifest;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -39,7 +40,7 @@ public class ServiceActivity extends AppCompatActivity {
     private TextView showNameTextView, showLatTextView, showLngTextView;
     private String nameString, surnameString, idString,
             groupCrimeString, categoryString, crimeString, detailString, dateString;
-    private int idAnInt;
+    private int idAnInt;    //id of User
     private LocationManager objLocationManager;
     private Criteria objCriteria;
     private boolean GPSABoolean, networkABoolean;
@@ -64,9 +65,14 @@ public class ServiceActivity extends AppCompatActivity {
         //Create ExpanableListView
         createExpanListView();
 
-
-
     }   // Main Method
+
+    public void clickHistory(View view) {
+        Intent intent = new Intent(ServiceActivity.this, UserHistoryListView.class);
+        intent.putExtra("id", idString);
+        startActivity(intent);
+    }
+
 
     public void clickSentData(View view) {
 
