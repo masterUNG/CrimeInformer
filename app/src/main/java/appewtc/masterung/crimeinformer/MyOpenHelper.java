@@ -22,6 +22,16 @@ public class MyOpenHelper extends SQLiteOpenHelper{
             "PhoneNumber text, " +
             "Email text);";
 
+    private static final String create_crime_table = "create table crimeTABLE (" +
+            "_id integer primary key, " +
+            "Informer text," +
+            "Date text," +
+            "Lat text, " +
+            "Lng text," +
+            "Category text," +
+            "Crime text," +
+            "Detail text);";
+
     public MyOpenHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }   // Constructor
@@ -29,6 +39,7 @@ public class MyOpenHelper extends SQLiteOpenHelper{
     @Override
     public void onCreate(SQLiteDatabase sqLiteDatabase) {
         sqLiteDatabase.execSQL(CREATE_USER_TABLE);
+        sqLiteDatabase.execSQL(create_crime_table);
     }
 
     @Override

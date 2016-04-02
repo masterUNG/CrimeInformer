@@ -24,6 +24,15 @@ public class ManageTABLE {
     public static final String COLUMN_PHONENUMBER = "PhoneNumber";
     public static final String COMUMN_EMAIL = "Email";
 
+    public static final String crime_table = "crimeTABLE";
+    public static final String column_Informer = "Informer";
+    public static final String column_Date = "Date";
+    public static final String column_Lat = "Lat";
+    public static final String column_Lng = "Lng";
+    public static final String column_Category = "Category";
+    public static final String column_Crime = "Crime";
+    public static final String column_Detail = "Detail";
+
 
     public ManageTABLE(Context context) {
 
@@ -32,6 +41,26 @@ public class ManageTABLE {
         readSqLiteDatabase = objMyOpenHelper.getReadableDatabase();
 
     }   // Constructor
+
+    public long addCrime(String strInformer,
+                         String strDate,
+                         String strLat,
+                         String strLng,
+                         String strCategory,
+                         String strCrime,
+                         String strDetail) {
+
+        ContentValues contentValues = new ContentValues();
+        contentValues.put(column_Informer, strInformer);
+        contentValues.put(column_Date, strDate);
+        contentValues.put(column_Lat, strLat);
+        contentValues.put(column_Lng, strLng);
+        contentValues.put(column_Category, strCategory);
+        contentValues.put(column_Crime, strCrime);
+        contentValues.put(column_Detail, strDetail);
+
+        return writeSqLiteDatabase.insert(crime_table, null, contentValues);
+    }
 
     public String[] searchUser(String strUser) {
 
@@ -50,7 +79,7 @@ public class ManageTABLE {
                 if (objCursor.moveToFirst()) {
 
                     strResult = new String[objCursor.getColumnCount()];
-                    for (int i=0;i<objCursor.getColumnCount();i++) {
+                    for (int i = 0; i < objCursor.getColumnCount(); i++) {
                         strResult[i] = objCursor.getString(i);
                     }   //for
                 }   // if2

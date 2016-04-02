@@ -123,6 +123,7 @@ public class LoginActivity extends AppCompatActivity {
         SQLiteDatabase objSqLiteDatabase = openOrCreateDatabase(MyOpenHelper.DATABASE_NAME,
                 MODE_PRIVATE, null);
         objSqLiteDatabase.delete(ManageTABLE.TABLE_NAME, null, null);
+        objSqLiteDatabase.delete(ManageTABLE.crime_table, null, null);
     }
 
     private void synChronizeJSON() {

@@ -19,6 +19,9 @@ public class MainActivity extends AppCompatActivity {
 
     private void createOrOpen() {
         ManageTABLE objManageTABLE = new ManageTABLE(this);
+
+        objManageTABLE.addCrime("Informer", "Date", "Lat", "Lng", "Category", "Crime", "Detail");
+
     }
 
     public void clickLogin(View view) {
