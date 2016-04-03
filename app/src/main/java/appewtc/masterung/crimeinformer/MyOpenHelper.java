@@ -20,7 +20,8 @@ public class MyOpenHelper extends SQLiteOpenHelper{
             "Surname text, " +
             "ID_card text, " +
             "PhoneNumber text, " +
-            "Email text);";
+            "Email text, " +
+            "Status text);";
 
     private static final String create_crime_table = "create table crimeTABLE (" +
             "_id integer primary key, " +

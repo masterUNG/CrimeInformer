@@ -23,6 +23,7 @@ public class ManageTABLE {
     public static final String COLUMN_ID_CARD = "ID_card";
     public static final String COLUMN_PHONENUMBER = "PhoneNumber";
     public static final String COMUMN_EMAIL = "Email";
+    public static final String column_status = "Status";
 
     public static final String crime_table = "crimeTABLE";
     public static final String column_Informer = "Informer";
@@ -70,7 +71,7 @@ public class ManageTABLE {
             Cursor objCursor = readSqLiteDatabase.query(TABLE_NAME,
                     new String[]{COLUMN_ID, COLUMN_USER, COLUMN_PASSWORD,
                             COLUMN_NAME, COLUMN_SURNAME, COLUMN_ID_CARD,
-                            COLUMN_PHONENUMBER, COMUMN_EMAIL},
+                            COLUMN_PHONENUMBER, COMUMN_EMAIL, column_status},
                     COLUMN_USER + "=?",
                     new String[]{String.valueOf(strUser)},
                     null, null, null, null);
@@ -100,7 +101,8 @@ public class ManageTABLE {
                             String strSurname,
                             String strID_card,
                             String strPhoneNumber,
-                            String strEmail) {
+                            String strEmail,
+                            String strStatus) {
 
         ContentValues objContentValues = new ContentValues();
         objContentValues.put(COLUMN_USER, strUser);
@@ -110,6 +112,7 @@ public class ManageTABLE {
         objContentValues.put(COLUMN_ID_CARD, strID_card);
         objContentValues.put(COLUMN_PHONENUMBER, strPhoneNumber);
         objContentValues.put(COMUMN_EMAIL, strEmail);
+        objContentValues.put(column_status, strStatus);
 
         return writeSqLiteDatabase.insert(TABLE_NAME, null, objContentValues);
     }

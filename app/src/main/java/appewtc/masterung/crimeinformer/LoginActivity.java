@@ -81,7 +81,10 @@ public class LoginActivity extends AppCompatActivity {
 
             if (passwordString.equals(strMyResult[2])) {
 
-                welcomeDialog(strMyResult[0], strMyResult[3], strMyResult[4]);
+                welcomeDialog(strMyResult[0],
+                        strMyResult[3],
+                        strMyResult[4],
+                        strMyResult[8]);
 
             } else {
 
@@ -100,7 +103,10 @@ public class LoginActivity extends AppCompatActivity {
 
     }   // checkUser
 
-    private void welcomeDialog(final String strID, String strName, String strSurname) {
+    private void welcomeDialog(final String strID,
+                               String strName,
+                               String strSurname,
+                               final String strStatus) {
 
         AlertDialog.Builder objBuilder = new AlertDialog.Builder(this);
         objBuilder.setIcon(R.drawable.icon_question);
@@ -111,6 +117,7 @@ public class LoginActivity extends AppCompatActivity {
             public void onClick(DialogInterface dialogInterface, int i) {
                 Intent objIntent = new Intent(LoginActivity.this, ServiceActivity.class);
                 objIntent.putExtra("ID", strID);
+                objIntent.putExtra("Status", strStatus);
                 startActivity(objIntent);
                 finish();
             }
@@ -181,8 +188,10 @@ public class LoginActivity extends AppCompatActivity {
                 String strIDcard = object.getString(ManageTABLE.COLUMN_ID_CARD);
                 String strPhoneNumber = object.getString(ManageTABLE.COLUMN_PHONENUMBER);
                 String strEmail = object.getString(ManageTABLE.COMUMN_EMAIL);
+                String strStatus = object.getString(ManageTABLE.column_status);
+
                 objManageTABLE.addNewValue(strUser, strPassword, strName,
-                        strSurname, strIDcard, strPhoneNumber, strEmail);
+                        strSurname, strIDcard, strPhoneNumber, strEmail, strStatus);
             }
 
         } catch (Exception e) {

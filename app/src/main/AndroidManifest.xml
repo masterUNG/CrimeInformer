@@ -23,7 +23,8 @@
         <activity android:name=".LoginActivity" />
         <activity android:name=".ServiceActivity" />
         <activity android:name=".HistoryActivity" />
-        <activity android:name=".UserHistoryListView"></activity>
+        <activity android:name=".UserHistoryListView" />
+        <activity android:name=".ReadAllAdmin"></activity>
     </application>
 
 </manifest>

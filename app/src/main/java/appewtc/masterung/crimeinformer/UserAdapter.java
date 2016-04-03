@@ -16,7 +16,10 @@ public class UserAdapter extends BaseAdapter{
     private Context context;
     private String[] crimeStrings, categoryStrings, dateStrings;
 
-    public UserAdapter(Context context, String[] crimeStrings, String[] categoryStrings, String[] dateStrings) {
+    public UserAdapter(Context context,
+                       String[] crimeStrings,
+                       String[] categoryStrings,
+                       String[] dateStrings) {
         this.context = context;
         this.crimeStrings = crimeStrings;
         this.categoryStrings = categoryStrings;
