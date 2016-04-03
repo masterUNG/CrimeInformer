@@ -15,7 +15,7 @@
             android:layout_height="wrap_content"
             android:text="New Text"
             android:id="@+id/textView16"
-            android:textSize="@dimen/h1"
+            android:textSize="20sp"
             android:layout_weight="1"
             android:textColor="@color/text_list" />
 
@@ -24,7 +24,7 @@
             android:layout_height="wrap_content"
             android:text="New Text"
             android:id="@+id/textView17"
-            android:textSize="@dimen/h1"
+            android:textSize="20sp"
             android:layout_weight="1"
             android:gravity="right"
             android:textColor="@color/text_list" />
@@ -35,7 +35,7 @@
         android:layout_height="wrap_content"
         android:text="New Text"
         android:id="@+id/textView18"
-        android:textSize="@dimen/h2"
+        android:textSize="15sp"
         android:textStyle="bold"
         android:textColor="@color/text_list" />
 </LinearLayout>

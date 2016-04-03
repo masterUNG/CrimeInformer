@@ -12,5 +12,7 @@
     <string name="detail">รายละเอียด</string>
     <string name="location">คุณอยู่ที่ :</string>
 
+    <string name="read_all">ข้อมูล ผู้แจ้ง ทั้งหมด</string>
+
 
 </resources>
